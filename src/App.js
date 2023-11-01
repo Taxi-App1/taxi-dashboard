@@ -4,8 +4,9 @@ import Layouts from "./Layouts/Layouts";
 import SignInPage from "./Pages/SignInPage";
 import DriverPage from "./Pages/DriverPage";
 import UserPage from "./Pages/UsersPage";
-import DashboardPage from "./Pages/DashboardPage";
 import OrderPage from "./Pages/OrderPage";
+import DashboardPage from "./Pages/DashboardPage";
+import AdminPage from "./Pages/Admin";
 function App() {
   return (
     <div className="">
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Layouts/>}>
                 <Route path="/" element={<DashboardPage/>} />
                 <Route path="/signIn" element={<SignInPage/>} />
+                <Route path="/admin" element={<AdminPage/>} />
                 <Route path="/driver" element={<DriverPage/>} />
                 <Route path="/user" element={<UserPage/>} />
                 <Route path="/order" element={<OrderPage/>} />

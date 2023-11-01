@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    font-family: "Poppins",sans-serif ;
+}
+:root{
+   --primary:"#ffb200";
+    --secondary:"#ffd403"
+}
+.icon-color{
+    color: var(--secondary) !important;
+}
