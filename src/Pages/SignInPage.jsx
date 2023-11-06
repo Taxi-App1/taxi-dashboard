@@ -19,12 +19,10 @@ const { addTokenAdmin } = useContext(adminContext);
       );
       addTokenAdmin(response.data.token);
       localStorage.setItem("token", response.data.token);
-    console.log(response)
       toast.success("LogIn successful");
       navigate("/");
     } catch (error) {
-      console.log("Error:", error);
-      
+      console.log("Error:", error)
       toast.error("Error SignIn, Please Try Again");
     }}
   return (
