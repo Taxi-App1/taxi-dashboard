@@ -46,7 +46,7 @@ function SideBarComponent(props) {
         <img src={logo} alt="Logo" className="rounded-full md:w-32 md:h-32 w-full h-full"/>
       </div>
       <div className="flex flex-col gap-4">
-        {links.map((link, index) => (<div className="flex flex-row   md:justify-between gap-4">
+        {links.map((link, index) => (<div className="flex flex-row   md:justify-between gap-4" key={index}>
         <img src={link.icon} alt="Logo" className=" self-center w-10 h-10"/>
           <Link className=" text-secondary font-semibold text-3xl  md:w-32 py-5 " key={index} to={link.link}>
             {link.name}
