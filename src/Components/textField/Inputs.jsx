@@ -3,7 +3,7 @@ function Input({ required, placeholder, onChange, label, name, type, renderOptio
         return (
             <>
                 <label className="block mb-2 text-sm font-medium text-white dark:text-white" >{label}</label>
-                <select name={name} onChange={onChange} value={selectedOption} required={required} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md w-full p-1.5" >
+                <select name={name} onChange={onChange} defaultValue={selectedOption} required={required} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md w-full p-1.5" >
                     {renderOptionInSelect()}
                 </select>
             </>
