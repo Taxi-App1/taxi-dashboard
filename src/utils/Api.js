@@ -51,7 +51,7 @@ class Request {
         data.picture_id && formData.append("picture_id", data.picture_id);
         data.car_type && formData.append("car_type", data.car_type);
         data.car_color && formData.append("car_color", data.car_color);
-        data.isAccess && formData.append("isAccess", data.isAccess);
+        typeof(data.isAccess) == "boolean" && formData.append("isAccess", data.isAccess);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}driver/updateDriver/${id}`,

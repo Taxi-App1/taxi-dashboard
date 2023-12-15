@@ -115,9 +115,8 @@ function DriverPage() {
                 header: 'Access',
                 size: 100,
                 Cell: (row) => (<Toggel checked={row.row.original.isAccess} onChange={async () => {
-                    console.log(row.row.original.isAccess)
                     await request.editDriver(row.row.original._id, { isAccess: !row.row.original.isAccess })
-                        .then((res) => { console.log(res); getData(); });
+                        .then(() => { getData(); });
                 }} />)
             },
             {
