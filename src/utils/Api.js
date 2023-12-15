@@ -31,6 +31,7 @@ class Request {
         formData.append("picture_id", data.picture_id);
         formData.append("car_type", data.car_type);
         formData.append("car_color", data.car_color);
+        formData.append("expire_date", data.expire_date);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}driver/registerDriver`,
@@ -52,6 +53,7 @@ class Request {
         data.car_type && formData.append("car_type", data.car_type);
         data.car_color && formData.append("car_color", data.car_color);
         typeof(data.isAccess) == "boolean" && formData.append("isAccess", data.isAccess);
+        data.expire_date && formData.append("expire_date", data.expire_date);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}driver/updateDriver/${id}`,

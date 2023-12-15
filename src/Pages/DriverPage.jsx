@@ -120,6 +120,12 @@ function DriverPage() {
                 }} />)
             },
             {
+                accessorKey: 'expire_date',
+                header: 'Expire Date',
+                size: 100,
+                Cell: (row) => (<span>{row.row.original.expire_date ? row.row.original.expire_date.replace("T", " ").slice(0, 16): ""}</span>)
+            },
+            {
                 accessorKey: 'createdAt',
                 header: 'Join At',
                 size: 150,
@@ -190,6 +196,11 @@ function DriverPage() {
         label: 'Car Color',
         type: 'text',
         name: 'car_color',
+        placeholder: driverByid.car_color
+    }, {
+        label: 'Expire Date',
+        type: 'date',
+        name: 'expire_date',
         placeholder: driverByid.car_color
     },
     ]
