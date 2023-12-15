@@ -58,7 +58,8 @@ function DriverPage() {
 
     const editDriver = async (e) => {
         e.preventDefault()
-        await request.editDriver(idEdit, dataEdit).then(() => {
+        await request.editDriver(idEdit, dataEdit).then((res) => {
+            console.log(res)
             getData()
             setFormVisibleEdite(false)
         })
