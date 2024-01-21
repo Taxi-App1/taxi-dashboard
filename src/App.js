@@ -8,6 +8,7 @@ import DashboardPage from "./Pages/DashboardPage";
 import AdminPage from "./Pages/Admin";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import "./App.css"
 import { AdminProvider } from "./context/adminContext";
 import RequireAdmin from "./context/protect";
 function App() {

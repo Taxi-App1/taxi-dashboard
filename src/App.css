@@ -1,0 +1,15 @@
+.searchInput:hover {
+    outline: none;
+    border-color: white;
+    background-color: #fff;
+    box-shadow: 0 0 0 5px rgb(154 198 229 / 40%);
+  }
+  
+  .searchInput {
+    border: 2px solid transparent;
+    outline: none; 
+    background-color: #fff;
+    color: #0a1a44;
+    transition: 0.5s ease;
+  }
+ 
