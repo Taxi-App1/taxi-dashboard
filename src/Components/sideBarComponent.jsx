@@ -41,7 +41,7 @@ function SideBarComponent(props) {
   let { className } = props;
 
   return (
-    <div className={`flex flex-col h-screen items-center p-10 justify-around bg-white ${className}`}>
+    <div className={`flex flex-col h-screen items-center p-10 justify-around bg-black ${className}`}>
       <div>
         <img src={logo} alt="Logo" className="rounded-full md:w-32 md:h-32 w-full h-full"/>
       </div>
