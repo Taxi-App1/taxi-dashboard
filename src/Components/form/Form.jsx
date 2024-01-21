@@ -22,8 +22,8 @@ function Form({ title, inputsFiled, setFormVisible, formVisible, nameOfButton, o
 
     }
 
-    return (<div className="w-full h-full z-10 bg-black bg-opacity-30 fixed top-0 left-0 flex justify-center items-center">
-        <form className="w-[600px] p-4 bg-black rounded-lg shadow-[-2px_2px_0px_0px_#ffd403]" onSubmit={onSubmit}>
+    return (<div className="w-full h-full z-10 bg-white bg-opacity-30 fixed top-0 left-0 flex justify-center items-center">
+        <form className="w-[600px] p-4 bg-white rounded-lg shadow-[-2px_2px_0px_0px_#ffd403]" onSubmit={onSubmit}>
             <div className="flex  items-center justify-between">
                 <h2 className=" text-2xl font-bold text-primary my-2 mb-4 " >{title}</h2>
                 <div onClick={() => setFormVisible(!formVisible)} >
