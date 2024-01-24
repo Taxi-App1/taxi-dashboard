@@ -19,6 +19,7 @@ const { addTokenAdmin } = useContext(adminContext);
       );
       addTokenAdmin(response.data.token);
       localStorage.setItem("token", response.data.token);
+   
       toast.success("LogIn successful");
       navigate("/");
     } catch (error) {

@@ -132,7 +132,7 @@ function DriverPage() {
                 Cell: (row) => (<span>{row.row.original.createdAt.replace("T", " ").slice(0, 16)}</span>)
             },
             {
-                header: 'actions',
+                header: 'Actions',
                 Cell: ({ row, table }) => (
                     <div className='flex gap-2'>
                         <div className='px-1 py-1 text-primary cursor-pointer' onClick={() => { setFormVisibleEdite(true); setIdEdit(row.original._id) }}><Edit /> </div>
@@ -213,7 +213,7 @@ function DriverPage() {
             {formVisible && <Form title="Add Driver" inputsFiled={inputsFiled} setFormVisible={setFormVisible} formVisible={formVisible} nameOfButton="Add Driver" setDataPost={setDataPost} dataPost={dataPost} onSubmit={postData} />}
             {formVisibleEdit && <Form title="Edit Driver" inputsFiled={inputsFiled} setFormVisible={setFormVisibleEdite} formVisible={formVisibleEdit} nameOfButton="Edit Driver" setDataPost={setDataEdit} dataPost={dataEdit} onSubmit={editDriver} />}
             <MaterialReactTable
-                renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button nameOfButton="Add New Driver" onClick={() => setFormVisible(true)} /> </div>)}
+                renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' nameOfButton="Add New Driver" onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
         </>

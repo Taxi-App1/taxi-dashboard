@@ -12,4 +12,9 @@
     color: #0a1a44;
     transition: 0.5s ease;
   }
- 
+  .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    color:#292663 !important; 
+  }
+  .css-lpzr28-MuiTableCell-root {
+    color:#292663 !important; 
+  }

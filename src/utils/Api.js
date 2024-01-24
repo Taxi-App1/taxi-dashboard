@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 class Request {
     async getDriver() {
         try {
@@ -7,6 +7,7 @@ class Request {
                 `${process.env.REACT_APP_URL}driver/getDriver`
             );
             return response.data;
+            
         } catch (error) {
             console.log("Error fetching driver data:", error);
         }
@@ -37,8 +38,10 @@ class Request {
                 `${process.env.REACT_APP_URL}driver/registerDriver`,
                 formData
             );
+            toast.success("Driver created successfully")
             return response.data;
         } catch (error) {
+            toast.error("Error Created Driver")
             console.log("Error fetching driver data:", error);
         }
     }
@@ -59,8 +62,10 @@ class Request {
                 `${process.env.REACT_APP_URL}driver/updateDriver/${id}`,
                 formData
             );
+            toast.success("Driver Edited successfully")
             return response.data;
         } catch (error) {
+            toast.error("Error Edited Driver")
             console.log("Error fetching driver data:", error);
         }
     }
@@ -69,8 +74,10 @@ class Request {
             const response = await axios.delete(
                 `${process.env.REACT_APP_URL}driver/deleteDriver/${id}`
             );
+            toast.success("Driver Deleted successfully");
             return response.data;
         } catch (error) {
+            toast.error("Error Deleted Driver");
             console.log("Error DELETE driver data:", error);
         }
     }
@@ -95,7 +102,16 @@ class Request {
             console.log("Error fetching user data:", error);
         }
     }
-
+    async getAdminById(id) {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_URL}user/getAdmin/${id}`
+            );
+            return response.data;
+        } catch (error) {
+            console.log("Error fetching user data:", error);
+        }
+    }
     async createUser(data) {
         const formData = new FormData();
         formData.append("first_name", data.first_name);
@@ -108,8 +124,11 @@ class Request {
                 `${process.env.REACT_APP_URL}user/registerUser`,
                 formData
             );
+            toast.success("User Created Successfully");
             return response.data;
+          
         } catch (error) {
+            toast.error("Error Created User");
             console.log("Error fetching driver data:", error);
         }
     }
@@ -125,9 +144,11 @@ class Request {
                 `${process.env.REACT_APP_URL}user/updateUser/${id}`,
                 formData
             );
+            toast.success("User Edited Successfully");
             return response.data;
         } catch (error) {
-            console.log("Error fetching driver data:", error);
+            toast.error("Error Edited User");
+            console.log("Error fetching User data:", error);
         }
     }
     async deleteUser(id) {
@@ -135,9 +156,74 @@ class Request {
             const response = await axios.delete(
                 `${process.env.REACT_APP_URL}user/deleteUser/${id}`
             );
+            toast.success("User Deleted Successfully");
             return response.data;
         } catch (error) {
-            console.log("Error DELETE driver data:", error);
+            toast.erro("Error Deleted User");
+            console.log("Error DELETE User data:", error);
+        }
+    }
+    async deleteAdmin(id) {
+        try {
+            const response = await axios.delete(
+                `${process.env.REACT_APP_URL}admin/delete/${id}`
+            );
+            toast.success("Admin Deleted Successfully");
+            return response.data;
+        } catch (error) {
+            toast.error("Error Deleted Admin");
+            console.log("Error DELETE admin data:", error);
+        }
+    }
+    async editAdmin(id, data) {
+        const formData = new FormData();
+
+        data.username && formData.append("user_name", data.username);
+        data.full_name && formData.append("full_name", data.full_name);
+        data.email && formData.append("email", data.email);
+        data.password && formData.append("password", data.password);
+
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_URL}admin/update/${id}`,
+                formData
+            );
+            toast.success(" Admin Updated Successfully");
+            return response.data;
+        } catch (error) {
+            toast.error(" Error Updated Admin");
+            console.log("Error edit admin data :", error);
+        }
+    }
+    async createAdmin(data) {
+
+
+
+
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_URL}admin/register`,
+                {
+                    username: data.username,
+                    full_name: data.full_name,
+                    email: data.email,
+                    password: data.password
+                })
+                toast.success("Admin Created Successfully");
+            return response.data;
+        } catch (error) {
+            toast.error("Error Created Admin");
+            console.log("Error create admin data :", error);
+        }
+    }
+    async getAdmin() {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_URL}admin`
+            );
+            return response.data;
+        } catch (error) {
+            console.log("Error fetching Admin data:", error);
         }
     }
 }
