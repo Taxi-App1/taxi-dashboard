@@ -7,7 +7,7 @@ import dashboard from "../assets/dashboard.svg"
 import logout from "../assets/logout.svg"
 import { toast } from "react-toastify";
 
-// import { useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 
 
@@ -43,7 +43,7 @@ function SideBarComponent(props) {
   ]
 
   let { className } = props;
-  // const isMobile= useMediaQuery("(max-width: 760px)")
+  const isMobile= useMediaQuery("(max-width: 760px)")
   const navigate = useNavigate();
    const handleLogout = ()=>{
 
@@ -57,27 +57,27 @@ function SideBarComponent(props) {
     }
    }
   return (
-    <div className={`flex flex-col h-screen shadow-lg items-center p-10 justify-around bg-white ${className}`}>
+    <div className={`flex flex-col gap-4 h-screen shadow-lg md:items-center items-start md:p-10 p-3 md:justify-around bg-white ${className}`}>
       <div>
-        <img src={logo} alt="Logo" className="rounded-full md:w-32 md:h-32 w-full h-full"/>
+        <img src={logo} alt="Logo" className="rounded-full md:w-32 md:h-32 w-12 h-12 "/>
       </div>
       <div className="flex  flex-col gap-4">
-        {links.map((link, index) => (<Link   key={index} to={link.link} className={`flex flex-row justify-around px-2  bg-gradient-to-r from-secondary to-primary   rounded-lg  md:justify-between gap-4`} >
-        <img src={link.icon} alt="Logo" className= {` bg-white  rounded-lg  p-2  self-center w-10 h-10`}/>
-       {/* {!isMobile &&  */}
+        {links.map((link, index) => (<Link   key={index} to={link.link} className={`flex flex-row justify-around p-2  bg-gradient-to-r from-secondary to-primary   rounded-lg  md:justify-between gap-4`} >
+        <img src={link.icon} alt="Logo" className= {` bg-white  rounded-lg  md:p-2 p-1  self-center md:w-10 md:h-10 w-8 h-8`}/>
+       {!isMobile && 
          <Link className={`text-white  font-semibold text-2xl  flex-1  py-3 `} to={link.link}>
             {link.name}
           </Link>
-          {/* } */}
+         } 
           </Link>
         ))}
         </div>
         
-        <div onClick={()=>{ handleLogout()  }} className= {`flex cursor-pointer flex-row justify-around px-2  bg-gradient-to-r from-secondary to-primary   rounded-lg  md:justify-between gap-4`} >
-        <img src={logout} alt="Logo" className= {` bg-white  rounded-lg  p-2  self-center w-10 h-10`}/>
-          <p className={` text-white   font-semibold text-2xl w-32  flex-1  py-3 `} >
+        <div onClick={()=>{ handleLogout()  }} className= {`flex cursor-pointer flex-row justify-around p-2  bg-gradient-to-r from-secondary to-primary   rounded-lg  md:justify-between gap-4`} >
+        <img src={logout} alt="Logo" className= {` bg-white  rounded-lg  p-2  self-center md:w-10 md:h-10 w-8 h-8`}/>
+        {!isMobile &&   <p className={` text-white   font-semibold text-2xl w-32  flex-1  py-3 `} >
           Admin
-          </p>
+          </p> }
           </div>
     </div>
   );
