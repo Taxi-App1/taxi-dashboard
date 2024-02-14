@@ -105,7 +105,7 @@ class Request {
     async getAdminById(id) {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}user/getAdmin/${id}`
+                `${process.env.REACT_APP_URL}admin/getAdmin/${id}`
             );
             return response.data;
         } catch (error) {
@@ -195,6 +195,21 @@ class Request {
             console.log("Error edit admin data :", error);
         }
     }
+    async upgradeRole(id, role) {
+    
+        try {
+       
+            const response = await axios.put(
+                `${process.env.REACT_APP_URL}admin/upgrade/${id}`,{role}
+            
+            );
+            toast.success("isSuperAdmin");
+            return response.data;}
+         catch (error) {
+            toast.error(" Error Updated Admin");
+            console.log("Error edit admin data :", error);
+        }
+    }
     async createAdmin(data) {
 
 
@@ -221,7 +236,7 @@ class Request {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL}admin`
             );
-            return response.data;
+            return response?.data?.response;
         } catch (error) {
             console.log("Error fetching Admin data:", error);
         }

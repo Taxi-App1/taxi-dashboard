@@ -7,6 +7,7 @@ import Button from '../Components/button/Buttons';
 import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
+import { toast } from 'react-toastify';
 
 
 function AdminPage() {
@@ -21,26 +22,29 @@ function AdminPage() {
     const [adminByid, setAdminByid] = useState({})
 
 
+ 
+
+    const getData = async () => {
+        setdata(await request.getAdmin())
+    }
     useEffect(() => {
         getData()
     }, [])
-
-    // const getData = async () => {
-    //     setdata(await request.getAdmin())
-    // }
-    async function getData() {
-        try {
-          const data = await request.getAdmin();
-          setdata(data)
-        } catch (error) {
-          console.error("Error fetching admin data:", error);
-        }
-      }
+    // async function getData() {
+    //     try {
+    //       const data = await request.getAdmin();
+    //       setdata(data)
+    //     } catch (error) {
+    //       console.error("Error fetching admin data:", error);
+    //     }
+    //   }
 
     useEffect(() => {
         const getAdminById = async () => {
             if (idEdit) {
-                setAdminByid(await request.getAdminById(idEdit))
+                const resposne= await request.getAdminById(idEdit)
+                setAdminByid( resposne)
+             
             }
             if (!formVisibleEdit) {
                 setAdminByid({})
@@ -48,6 +52,7 @@ function AdminPage() {
         }
         getAdminById()
     }, [idEdit, formVisibleEdit])
+
 
 // console.log(getData())
     const postData = async (e) => {
@@ -71,7 +76,6 @@ function AdminPage() {
             setFormVisibleEdite(false)
         })
     }
-
 
     const columns =
         [
@@ -97,25 +101,22 @@ function AdminPage() {
 
             {
                 accessorKey: 'role',
-                header: 'Role',
+                header: 'isSuperAdmin',
                 size: 100,
-                Cell: (row) => (<Toggel checked={row.row.original.isAccess} onChange={async () => {
-                    await request.editAdmin(row.row.original._id, { isAccess: !row.row.original.isAccess })
+                Cell: (row) => (  <Toggel checked={row.row.original.role == "isSuperAdmin"} onChange={async () => {
+                    // if (   row.row.original.role =="isSuperAdmin"){
+                    let role 
+                    row.row.original.role =="isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
+                    await request.upgradeRole(row.row.original._id,role )
                         .then(() => { getData(); });
+                    // }
+                    //     else{
+                    //         toast.error("Sorry you are not a super admin")
+                    //     }
                 }} />)
             },
-            {
-                accessorKey: 'expire_date',
-                header: 'Expire Date',
-                size: 100,
-                Cell: (row) => (<span>{row.row.original.expire_date ? row.row.original.expire_date.replace("T", " ").slice(0, 16): ""}</span>)
-            },
-            {
-                accessorKey: 'createdAt',
-                header: 'Join At',
-                size: 150,
-                Cell: (row) => (<span>{row.row.original.createdAt.replace("T", " ").slice(0, 16)}</span>)
-            },
+
+
             {
                 header: 'Actions',
                 Cell: ({ row, table }) => (
@@ -131,25 +132,25 @@ function AdminPage() {
         label: 'full_name',
         type: 'text',
         name: 'full_name',
-        placeholder: adminByid.full_name
+        placeholder: adminByid?.full_name
     },
     {
         label: 'username',
         type: 'text',
         name: 'username',
-        placeholder: adminByid.username
+        placeholder: adminByid?.username
     },
     {
         label: 'email',
         type: 'email',
         name: 'email',
-        placeholder: adminByid.email
+        placeholder: adminByid?.email
     },
     {
         label: 'password',
         type: 'password',
         name: 'password',
-        placeholder: adminByid.password && '*****'
+        placeholder: adminByid?.password && '*****'
     }
     ]
 

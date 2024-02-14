@@ -20,14 +20,15 @@ function UserPage() {
 
 
 
-    useEffect(() => {
-        getData()
-    }, [])
+   
 
     const getData = async () => {
         setdata(await request.getUser())
     }
-    console.log(getData())
+    useEffect(() => {
+        getData()
+    }, [])
+    
     useEffect(() => {
         const getDriverById = async () => {
             if (idEdit) {

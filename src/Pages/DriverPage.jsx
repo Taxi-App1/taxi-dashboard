@@ -21,14 +21,14 @@ function DriverPage() {
     const [driverByid, setDriverByid] = useState({})
 
 
-    useEffect(() => {
-        getData()
-    }, [])
+
 
     const getData = async () => {
         setdata(await request.getDriver())
     }
-
+    useEffect(() => {
+        getData()
+    }, [])
     useEffect(() => {
         const getDriverById = async () => {
             if (idEdit) {
