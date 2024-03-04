@@ -18,7 +18,6 @@ const { addTokenAdmin } = useContext(adminContext);
         { password, username }
       );
       addTokenAdmin(response.data.token);
-      console.log(response.data)
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("id", response.data.user);
       // localStorage.setItem("role", response.data.role);

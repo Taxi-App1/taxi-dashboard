@@ -28,8 +28,6 @@ useEffect(() => {
 
   fetchAdminRole();
 }, [setRole]); // Include setRole in the dependency array to avoid linting warning
-
-console.log(role);
   return (
     <div className="">
         {/* <AdminProvider> */}
