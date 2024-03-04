@@ -8,12 +8,29 @@ import DashboardPage from "./Pages/DashboardPage";
 import AdminPage from "./Pages/Admin";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import "./App.css"
 import { AdminProvider } from "./context/adminContext";
 import RequireAdmin from "./context/protect";
+import adminContext from "./context/adminContext";
+import { useContext, useEffect } from "react";
+import request from "./utils/Api";
 function App() {
+const {setRole ,role} = useContext(adminContext)
+useEffect(() => {
+  const fetchAdminRole = async () => {
+      try {
+          const res = await request.getAdminById(localStorage.getItem("id"));
+          setRole(res?.role);
+      } catch (error) {
+          console.error("Error fetching admin role:", error);
+      }
+  };
+
+  fetchAdminRole();
+}, [setRole]); // Include setRole in the dependency array to avoid linting warning
   return (
     <div className="">
-        <AdminProvider>
+        {/* <AdminProvider> */}
       <Routes>
         <Route path="/sign-in" element={<SignInPage />} />
         <Route element={<RequireAdmin/>}>
@@ -26,7 +43,7 @@ function App() {
         </Route>
         </Route>
       </Routes>
-      </AdminProvider>
+      {/* </AdminProvider> */}
       <ToastContainer   position="top-right"
     autoClose={3000}
     newestOnTop={false}

@@ -7,7 +7,7 @@ import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
 
-function UserPage() {
+function UserPage(props) {
     const url = process.env.REACT_APP_URL
     const [data, setdata] = useState([])
     const [formVisible, setFormVisible] = useState(false)
@@ -20,14 +20,15 @@ function UserPage() {
 
 
 
-    useEffect(() => {
-        getData()
-    }, [])
+   
 
     const getData = async () => {
         setdata(await request.getUser())
     }
-
+    useEffect(() => {
+        getData()
+    }, [])
+    
     useEffect(() => {
         const getDriverById = async () => {
             if (idEdit) {
@@ -99,7 +100,7 @@ function UserPage() {
                 Cell: (row) => (<span>{row.row.original.createdAt.replace("T", " ").slice(0, 16)}</span>)
             },
             {
-                header: 'actions',
+                header: 'Actions',
                 Cell: ({ row, table }) => (
                     <div className='flex gap-2'>
                         <div className='px-1 py-1 text-primary cursor-pointer' onClick={() => { setFormVisibleEdite(true); setIdEdit(row.original._id) }}><Edit /> </div>
@@ -146,14 +147,14 @@ function UserPage() {
 
 
     return (
-        <>
+        <div className={props.className}>
             {formVisible && <Form title="Add User" inputsFiled={inputsFiled} setFormVisible={setFormVisible} formVisible={formVisible} nameOfButton="Add User" setDataPost={setDataPost} dataPost={dataPost} onSubmit={postData} />}
             {formVisibleEdit && <Form title="Edit User" inputsFiled={inputsFiled} setFormVisible={setFormVisibleEdite} formVisible={formVisibleEdit} nameOfButton="Edit User" setDataPost={setDataEdit} dataPost={dataEdit} onSubmit={editUser} />}
             <MaterialReactTable
-                renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button nameOfButton="Add New User" onClick={() => setFormVisible(true)} /> </div>)}
+                renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' nameOfButton="Add New User" onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
-        </>
+        </div>
     )
 
 }
