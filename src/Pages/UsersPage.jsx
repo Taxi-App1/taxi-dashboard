@@ -6,6 +6,7 @@ import Button from '../Components/button/Buttons';
 import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
+import DisplayImage from '../Components/DisplayImage';
 
 function UserPage() {
     const url = process.env.REACT_APP_URL
@@ -16,11 +17,13 @@ function UserPage() {
     const [dataEdit, setDataEdit] = useState({})
     const [idEdit, setIdEdit] = useState(null)
     const [userByid, setUserByid] = useState({})
+    const [isShow, setIsShow] = useState(false)
+    const [theImage, setImage] = useState('')
 
 
 
 
-   
+
 
     const getData = async () => {
         setdata(await request.getUser())
@@ -28,7 +31,7 @@ function UserPage() {
     useEffect(() => {
         getData()
     }, [])
-    
+
     useEffect(() => {
         const getDriverById = async () => {
             if (idEdit) {
@@ -91,7 +94,7 @@ function UserPage() {
                 accessorKey: 'image', //normal accessorKey
                 header: 'Image',
                 size: 70,
-                Cell: (row) => (<img src={`${url}${row.row.original.image}`} className=' w-10 h-10 rounded-full' alt={row.row.original.image} />)
+                Cell: (row) => (<img src={`${url}${row.row.original.image}`} onClick={() => { setIsShow(true); setImage(row.row.original.image) }} className=' w-10 h-10 rounded-full' alt={row.row.original.image} />)
             },
             {
                 accessorKey: 'createdAt',
@@ -154,6 +157,8 @@ function UserPage() {
                 renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' nameOfButton="Add New User" onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
+            {isShow && <DisplayImage image={theImage} isShow={setIsShow} />}
+
         </>
     )
 

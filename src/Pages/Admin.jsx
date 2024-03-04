@@ -22,8 +22,6 @@ function AdminPage() {
     const [adminByid, setAdminByid] = useState({})
 
 
- 
-
     const getData = async () => {
         setdata(await request.getAdmin())
     }
@@ -103,10 +101,10 @@ function AdminPage() {
                 accessorKey: 'role',
                 header: 'isSuperAdmin',
                 size: 100,
-                Cell: (row) => (  <Toggel checked={row.row.original.role == "isSuperAdmin"} onChange={async () => {
+                Cell: (row) => (  <Toggel checked={row.row.original.role === "isSuperAdmin"} onChange={async () => {
                     // if (   row.row.original.role =="isSuperAdmin"){
                     let role 
-                    row.row.original.role =="isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
+                    row.row.original.role === "isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
                     await request.upgradeRole(row.row.original._id,role )
                         .then(() => { getData(); });
                     // }
