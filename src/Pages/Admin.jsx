@@ -23,8 +23,6 @@ function AdminPage(props) {
     const [adminByid, setAdminByid] = useState({})
     const {role}=useContext(adminContext)
 
- 
-
     const getData = async () => {
         setdata(await request.getAdmin())
     }
@@ -105,7 +103,8 @@ function AdminPage(props) {
                 header: 'isSuperAdmin',
                 size: 100,
                 Cell: (row) => (  <Toggel checked={row.row.original.role === "isSuperAdmin"} onChange={async () => {
-                    if (   role =="isSuperAdmin"){
+                    // if (   row.row.original.role =="isSuperAdmin"){
+                    if (   role =="isSuperAdmin")
                     let role 
                     row.row.original.role === "isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
                     await request.upgradeRole(row.row.original._id,role )

@@ -7,6 +7,7 @@ import Button from '../Components/button/Buttons';
 import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
+import DisplayImage from '../Components/DisplayImage';
 
 
 function DriverPage() {
@@ -19,7 +20,8 @@ function DriverPage() {
     const [dataEdit, setDataEdit] = useState({})
     const [idEdit, setIdEdit] = useState(null)
     const [driverByid, setDriverByid] = useState({})
-
+    const [isShow, setIsShow] = useState(false)
+    const [theImage, setImage] = useState('')
 
 
 
@@ -92,13 +94,13 @@ function DriverPage() {
                 accessorKey: 'image', //normal accessorKey
                 header: 'Image',
                 size: 70,
-                Cell: (row) => (<img src={`${url}${row.row.original.image}`} className=' w-10 h-10 rounded-full' alt={row.row.original.image} />)
+                Cell: (row) => (<img onClick={() => { setIsShow(true); setImage(row.row.original.image) }} src={`${url}${row.row.original.image}`} className=' w-10 h-10 rounded-full cursor-pointer' alt={row.row.original.image} />)
             },
             {
                 accessorKey: 'picture_id', //normal accessorKey
                 header: 'Picture Id',
                 size: 70,
-                Cell: (row) => (<img src={`${url}${row.row.original.picture_id}`} className=' w-10 h-10 rounded-full' alt={row.row.original.picture_id} />)
+                Cell: (row) => (<img onClick={() => { setIsShow(true); setImage(row.row.original.picture_id) }} src={`${url}${row.row.original.picture_id}`} className=' w-10 h-10 rounded-full cursor-pointer' alt={row.row.original.picture_id} />)
             },
             {
                 accessorKey: 'car_type',
@@ -123,7 +125,7 @@ function DriverPage() {
                 accessorKey: 'expire_date',
                 header: 'Expire Date',
                 size: 100,
-                Cell: (row) => (<span>{row.row.original.expire_date ? row.row.original.expire_date.replace("T", " ").slice(0, 16): ""}</span>)
+                Cell: (row) => (<span>{row.row.original.expire_date ? row.row.original.expire_date.replace("T", " ").slice(0, 16) : ""}</span>)
             },
             {
                 accessorKey: 'createdAt',
@@ -216,6 +218,7 @@ function DriverPage() {
                 renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' nameOfButton="Add New Driver" onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
+            {isShow && <DisplayImage image={theImage} isShow ={setIsShow} />}
         </>
     )
 };

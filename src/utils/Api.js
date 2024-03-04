@@ -7,7 +7,6 @@ class Request {
                 `${process.env.REACT_APP_URL}driver/getDriver`
             );
             return response.data;
-            
         } catch (error) {
             console.log("Error fetching driver data:", error);
         }
@@ -38,10 +37,10 @@ class Request {
                 `${process.env.REACT_APP_URL}driver/registerDriver`,
                 formData
             );
-            toast.success("Driver created successfully")
+            toast.success("Driver created successfully");
             return response.data;
         } catch (error) {
-            toast.error("Error Created Driver")
+            toast.error("Error Created Driver");
             console.log("Error fetching driver data:", error);
         }
     }
@@ -55,17 +54,18 @@ class Request {
         data.picture_id && formData.append("picture_id", data.picture_id);
         data.car_type && formData.append("car_type", data.car_type);
         data.car_color && formData.append("car_color", data.car_color);
-        typeof(data.isAccess) == "boolean" && formData.append("isAccess", data.isAccess);
+        typeof data.isAccess == "boolean" &&
+            formData.append("isAccess", data.isAccess);
         data.expire_date && formData.append("expire_date", data.expire_date);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}driver/updateDriver/${id}`,
                 formData
             );
-            toast.success("Driver Edited successfully")
+            toast.success("Driver Edited successfully");
             return response.data;
         } catch (error) {
-            toast.error("Error Edited Driver")
+            toast.error("Error Edited Driver");
             console.log("Error fetching driver data:", error);
         }
     }
@@ -126,7 +126,6 @@ class Request {
             );
             toast.success("User Created Successfully");
             return response.data;
-          
         } catch (error) {
             toast.error("Error Created User");
             console.log("Error fetching driver data:", error);
@@ -178,15 +177,15 @@ class Request {
     async editAdmin(id, data) {
         const formData = new FormData();
 
-        data.username && formData.append("user_name", data.username);
-        data.full_name && formData.append("full_name", data.full_name);
-        data.email && formData.append("email", data.email);
-        data.password && formData.append("password", data.password);
+        // data.username && formData.append("user_name", data.username);
+        // data.full_name && formData.append("full_name", data.full_name);
+        // data.email && formData.append("email", data.email);
+        // data.password && formData.append("password", data.password);
 
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}admin/update/${id}`,
-                formData
+                data
             );
             toast.success(" Admin Updated Successfully");
             return response.data;
@@ -196,25 +195,21 @@ class Request {
         }
     }
     async upgradeRole(id, role) {
-    
         try {
-       
             const response = await axios.put(
-                `${process.env.REACT_APP_URL}admin/upgrade/${id}`,{role}
-            
+                `${process.env.REACT_APP_URL}admin/upgrade/${id}`,
+                { role }
             );
-            toast.success("Role Updated Successfully");
-            return response.data;}
+            toast.success("isSuperAdmin");
+            return response.data;
+        } 
          catch (error) {
+
             toast.error(" Error Updated Admin");
             console.log("Error edit admin data :", error);
         }
     }
     async createAdmin(data) {
-
-
-
-
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL}admin/register`,
@@ -222,9 +217,10 @@ class Request {
                     username: data.username,
                     full_name: data.full_name,
                     email: data.email,
-                    password: data.password
-                })
-                toast.success("Admin Created Successfully");
+                    password: data.password,
+                }
+            );
+            toast.success("Admin Created Successfully");
             return response.data;
         } catch (error) {
             toast.error("Error Created Admin");
