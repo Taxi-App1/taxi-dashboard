@@ -1,12 +1,14 @@
 
 import { MaterialReactTable } from 'material-react-table';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import request from "../utils/Api"
 import Toggel from '../Components/Toggel';
 import Button from '../Components/button/Buttons';
 import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
+import adminContext from '../context/adminContext';
+import { toast } from 'react-toastify';
 
 
 function AdminPage(props) {
@@ -19,7 +21,7 @@ function AdminPage(props) {
     const [dataEdit, setDataEdit] = useState({})
     const [idEdit, setIdEdit] = useState(null)
     const [adminByid, setAdminByid] = useState({})
-
+    const {role}=useContext(adminContext)
 
  
 
@@ -103,15 +105,15 @@ function AdminPage(props) {
                 header: 'isSuperAdmin',
                 size: 100,
                 Cell: (row) => (  <Toggel checked={row.row.original.role === "isSuperAdmin"} onChange={async () => {
-                    // if (   row.row.original.role =="isSuperAdmin"){
+                    if (   role =="isSuperAdmin"){
                     let role 
                     row.row.original.role === "isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
                     await request.upgradeRole(row.row.original._id,role )
                         .then(() => { getData(); });
-                    // }
-                    //     else{
-                    //         toast.error("Sorry you are not a super admin")
-                    //     }
+                    }
+                        else{
+                            toast.error("Sorry you are not a super admin")
+                        }
                 }} />)
             },
 

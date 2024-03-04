@@ -203,7 +203,7 @@ class Request {
                 `${process.env.REACT_APP_URL}admin/upgrade/${id}`,{role}
             
             );
-            toast.success("isSuperAdmin");
+            toast.success("Role Updated Successfully");
             return response.data;}
          catch (error) {
             toast.error(" Error Updated Admin");

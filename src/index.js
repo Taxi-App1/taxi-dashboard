@@ -4,12 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { AdminProvider } from './context/adminContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+
     <BrowserRouter>
+    <AdminProvider>
     <App />
+    </AdminProvider>
     </BrowserRouter>
+ 
   </React.StrictMode>
 );
 
