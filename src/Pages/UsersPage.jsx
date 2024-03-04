@@ -7,7 +7,7 @@ import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
 
-function UserPage() {
+function UserPage(props) {
     const url = process.env.REACT_APP_URL
     const [data, setdata] = useState([])
     const [formVisible, setFormVisible] = useState(false)
@@ -147,14 +147,14 @@ function UserPage() {
 
 
     return (
-        <>
+        <div className={props.className}>
             {formVisible && <Form title="Add User" inputsFiled={inputsFiled} setFormVisible={setFormVisible} formVisible={formVisible} nameOfButton="Add User" setDataPost={setDataPost} dataPost={dataPost} onSubmit={postData} />}
             {formVisibleEdit && <Form title="Edit User" inputsFiled={inputsFiled} setFormVisible={setFormVisibleEdite} formVisible={formVisibleEdit} nameOfButton="Edit User" setDataPost={setDataEdit} dataPost={dataEdit} onSubmit={editUser} />}
             <MaterialReactTable
                 renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' nameOfButton="Add New User" onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
-        </>
+        </div>
     )
 
 }
