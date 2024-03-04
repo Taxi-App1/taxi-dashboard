@@ -8,7 +8,7 @@ import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
 import DisplayImage from '../Components/DisplayImage';
 
-function UserPage() {
+function UserPage(props) {
     const url = process.env.REACT_APP_URL
     const [data, setdata] = useState([])
     const [formVisible, setFormVisible] = useState(false)
@@ -150,7 +150,7 @@ function UserPage() {
 
 
     return (
-        <>
+        <div className={props.className}>
             {formVisible && <Form title="Add User" inputsFiled={inputsFiled} setFormVisible={setFormVisible} formVisible={formVisible} nameOfButton="Add User" setDataPost={setDataPost} dataPost={dataPost} onSubmit={postData} />}
             {formVisibleEdit && <Form title="Edit User" inputsFiled={inputsFiled} setFormVisible={setFormVisibleEdite} formVisible={formVisibleEdit} nameOfButton="Edit User" setDataPost={setDataEdit} dataPost={dataEdit} onSubmit={editUser} />}
             <MaterialReactTable
@@ -159,7 +159,8 @@ function UserPage() {
                 data={data} />
             {isShow && <DisplayImage image={theImage} isShow={setIsShow} />}
 
-        </>
+        </div>
+
     )
 
 }

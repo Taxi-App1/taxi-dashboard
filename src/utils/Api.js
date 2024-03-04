@@ -195,7 +195,6 @@ class Request {
         }
     }
     async upgradeRole(id, role) {
-        console.log(role)
         try {
             const response = await axios.put(
                 `${process.env.REACT_APP_URL}admin/upgrade/${id}`,
@@ -203,7 +202,9 @@ class Request {
             );
             toast.success("isSuperAdmin");
             return response.data;
-        } catch (error) {
+        } 
+         catch (error) {
+
             toast.error(" Error Updated Admin");
             console.log("Error edit admin data :", error);
         }

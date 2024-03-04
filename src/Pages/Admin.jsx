@@ -1,16 +1,17 @@
 
 import { MaterialReactTable } from 'material-react-table';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import request from "../utils/Api"
 import Toggel from '../Components/Toggel';
 import Button from '../Components/button/Buttons';
 import { Edit } from "@mui/icons-material"
 import { Delete } from "@mui/icons-material"
 import Form from '../Components/form/Form';
+import adminContext from '../context/adminContext';
 import { toast } from 'react-toastify';
 
 
-function AdminPage() {
+function AdminPage(props) {
 
 
     const [data, setdata] = useState([])
@@ -20,7 +21,7 @@ function AdminPage() {
     const [dataEdit, setDataEdit] = useState({})
     const [idEdit, setIdEdit] = useState(null)
     const [adminByid, setAdminByid] = useState({})
-
+    const {role}=useContext(adminContext)
 
     const getData = async () => {
         setdata(await request.getAdmin())
@@ -103,14 +104,15 @@ function AdminPage() {
                 size: 100,
                 Cell: (row) => (  <Toggel checked={row.row.original.role === "isSuperAdmin"} onChange={async () => {
                     // if (   row.row.original.role =="isSuperAdmin"){
+                    if (   role =="isSuperAdmin")
                     let role 
                     row.row.original.role === "isSuperAdmin" ? role="isAdmin" :role="isSuperAdmin"
                     await request.upgradeRole(row.row.original._id,role )
                         .then(() => { getData(); });
-                    // }
-                    //     else{
-                    //         toast.error("Sorry you are not a super admin")
-                    //     }
+                    }
+                        else{
+                            toast.error("Sorry you are not a super admin")
+                        }
                 }} />)
             },
 
@@ -156,14 +158,14 @@ function AdminPage() {
 
 
     return (
-        <>
+        <div className={props.className}>
             {formVisible && <Form title="Add Admin" inputsFiled={inputsFiled} setFormVisible={setFormVisible} formVisible={formVisible} nameOfButton="Add Admin" setDataPost={setDataPost} dataPost={dataPost} onSubmit={postData} />}
             {formVisibleEdit && <Form title="Edit Admin" inputsFiled={inputsFiled} setFormVisible={setFormVisibleEdite} formVisible={formVisibleEdit} nameOfButton="Edit Admin" setDataPost={setDataEdit} dataPost={dataEdit} onSubmit={editAdmin} />}
             <MaterialReactTable
                 renderTopToolbarCustomActions={() => (<div className=" w-max"> <Button nameOfButton="Add New Admin" className='text-white font-semibold mt-1  w-full p-2 bg-gradient-to-r from-secondary to-primary rounded-md hover:scale-95' onClick={() => setFormVisible(true)} /> </div>)}
                 columns={columns}
                 data={data} />
-        </>
+        </div>
     )
 };
 
